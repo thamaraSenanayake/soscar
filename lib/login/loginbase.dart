@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:soscar/login/login.dart';
+import 'package:soscar/login/signIn.dart';
 import 'package:soscar/login/splashScreen.dart';
 
 class LoginBase extends StatefulWidget {
@@ -15,14 +17,19 @@ class _LoginBaseState extends State<LoginBase> implements LoginBaseListener{
     return Scaffold(
       body:_currentPage == LoginPage.Splash? 
         SplashScreen(listener:this):
+        _currentPage == LoginPage.SingIn? 
+        SignIn(listener: this):
+        _currentPage == LoginPage.Login? 
+        Login(listener: this):
         Container() ,
     );
   }
 
   @override
   moveToPage(LoginPage page) {
-    // TODO: implement moveToPage
-    throw UnimplementedError();
+    setState(() {
+      _currentPage = page;
+    });
   }
 }
 

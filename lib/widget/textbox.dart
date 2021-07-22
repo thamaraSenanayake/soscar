@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 import '../const.dart';
 
 class TextBox extends StatefulWidget {
   final String textBoxHint;
   final String initText;
-  final IconData prefixIcon;
+  final String prefixIcon;
   final IconData suffixIcon;
   final String textBoxKey;
   final Function(String) onChange;
@@ -94,37 +95,48 @@ class _TextBoxState extends State<TextBox> {
           )
         ],
       ),
-      child: TextField(
-        style: TextStyle(
-          color: Colors.black, 
-          fontSize: widget.prefixIcon == Icons.attach_money?18:15
-        ),
-        focusNode: widget.focusNode,
-        controller:_controller,
-        decoration: InputDecoration(
-          counterText: "",
-          border: InputBorder.none,
-          hintText: widget.textBoxHint,
-          prefixIcon:widget.prefixIcon != null ? Icon(
-            widget.prefixIcon,
-            size: widget.prefixIcon == Icons.attach_money?21:24,
-            color: widget.errorText.length ==0?AppColors.mainColor:Colors.red,
-          ) : null,
-          hintStyle:TextStyle(fontSize: 14, color: Color(0xffB3A9A9), height: 1.8),
-          suffixIcon: widget.suffixIcon != null ? Icon(widget.suffixIcon) : null,
-        ),
-        maxLines: widget.textInputType == TextInputType.multiline?null:1,
-        obscureText: widget.obscureText,
-        keyboardType: widget.textInputType,
-        textCapitalization: widget.firstLetterCapital?TextCapitalization.sentences:TextCapitalization.none,
-        onChanged: (value) {
-          widget.onChange(value);
-        },
-        onSubmitted: (value) {
-          widget.onSubmit(value);
-        },
-        maxLength: null,
-        // maxLengthEnforced: true,
+      child: Row(
+        children: [
+          widget.prefixIcon != null?Padding(
+            padding: const EdgeInsets.only(right:10.0),
+            child: Container(
+              height: 40,
+              width: 40,
+              padding: const EdgeInsets.all(5.0),
+              child: SvgPicture.asset(widget.prefixIcon)
+            ),
+          ):Container(),
+          Container(
+            width: widget.prefixIcon == null?(_width -86):(_width -146),
+            child: TextField(
+              style: TextStyle(
+                color: Colors.black, 
+                fontSize: 15
+              ),
+              focusNode: widget.focusNode,
+              controller:_controller,
+              decoration: InputDecoration(
+                counterText: "",
+                border: InputBorder.none,
+                hintText: widget.textBoxHint,
+                hintStyle:TextStyle(fontSize: 14, color: Color(0xffB3A9A9), height: 1.8),
+                suffixIcon: widget.suffixIcon != null ? Icon(widget.suffixIcon) : null,
+              ),
+              maxLines: widget.textInputType == TextInputType.multiline?null:1,
+              obscureText: widget.obscureText,
+              keyboardType: widget.textInputType,
+              textCapitalization: widget.firstLetterCapital?TextCapitalization.sentences:TextCapitalization.none,
+              onChanged: (value) {
+                widget.onChange(value);
+              },
+              onSubmitted: (value) {
+                widget.onSubmit(value);
+              },
+              maxLength: null,
+              // maxLengthEnforced: true,
+            ),
+          ),
+        ],
       ),
     );
   }
