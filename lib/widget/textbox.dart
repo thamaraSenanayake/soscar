@@ -66,11 +66,12 @@ class _TextBoxState extends State<TextBox> {
     return Container(
       width: AppData.width.w - 80.w,
       constraints: BoxConstraints(
-        minHeight: widget.textInputType == TextInputType.multiline? 300.h:100.h
+        minHeight: widget.textInputType == TextInputType.multiline? 300.h:100.h,
+        maxHeight: widget.textInputType == TextInputType.multiline? null:100.h
       ),
       padding:EdgeInsets.only(
         left:widget.prefixIcon == null ? 40.w : 0,
-        right:widget.suffixIcon == null? 40.w : 0
+        // right:widget.suffixIcon == null? 40.w : 0
       ),
       decoration: BoxDecoration(
         // color: widget.errorText.length ==0 ?Colors.white:Colors.redAccent,
@@ -105,7 +106,7 @@ class _TextBoxState extends State<TextBox> {
             ),
           ):Container(),
           Container(
-            width: widget.prefixIcon == null?(AppData.width.w -172):(AppData.width.w -292),
+            width: widget.prefixIcon == null?(AppData.width.w -172.w):(AppData.width.w -200.w),
             child: TextField(
               style: TextStyle(
                 color: Colors.black, 

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:soscar/const.dart';
+import 'package:soscar/profileScreen.dart/profileBase.dart';
+import 'package:soscar/widget/loading.dart';
 import 'package:soscar/widget/topBar.dart';
 import 'package:soscar/widget/customButton.dart';
 import 'package:soscar/widget/textbox.dart';
@@ -17,6 +19,49 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  String _email = '';
+  String _emailError = '';
+  String _password = '';
+  String _passwordError = '';
+  bool _loading = false;
+
+
+
+  _login() async {
+    bool _validation = true;
+    if( _email.isEmpty){
+      setState(() {
+        _emailError = "Required Field";        
+      });
+      _validation = false;
+    }
+    if( _password.isEmpty){
+      setState(() {
+        _passwordError = "Required Field";        
+      });
+      _validation = false;
+    }
+
+    if(_validation){
+      if(mounted)
+      setState(() {
+        _loading = true;
+      });
+      // todo call sigin API 
+       await new Future.delayed(const Duration(seconds :2));
+      if(mounted)
+      setState(() {
+        _loading = false;
+      });
+      Navigator.of(context).push(
+        PageRouteBuilder(
+          pageBuilder: (context, _, __) => ProfileBase(),
+          opaque: false
+        ),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -70,32 +115,63 @@ class _LoginState extends State<Login> {
                         ),
                         children:[
                           SizedBox(
-                            height: 100.h,
+                            height: 60.h,
+                          ),
+                          SizedBox(
+                            height: 40.h,
+                            width: AppData.width.h-80.h,
+                            child: Text(
+                              _emailError,
+                              style: TextStyle(
+                                color: Colors.red,
+                                fontSize: 30.sp
+                              ),
+                            ),
                           ),
                           TextBox(
+                            textInputType: TextInputType.emailAddress,
                             textBoxKey: "", 
                             onChange: (val){
-
+                              _email = val;
+                              if(_emailError.isNotEmpty){
+                                setState(() {
+                                  _emailError = "";                                
+                                });
+                              }
                             }, 
-                            errorText: "",
+                            errorText: _emailError,
                             textBoxHint: "Email",
                             prefixIcon: "assets/icon/gmail.svg",
                           ),
                           SizedBox(
-                            height: 20,
+                            height: 40.h,
+                            width: AppData.width.h-80.h,
+                            child: Text(
+                              _passwordError,
+                              style: TextStyle(
+                                color: Colors.red,
+                                fontSize: 30.sp
+                              ),
+                            ),
                           ),
                           TextBox(
+                            obscureText: true,
                             textBoxKey: "", 
                             onChange: (val){
-
+                              _password = val;
+                              if(_passwordError.isNotEmpty){
+                                setState(() {
+                                  _passwordError = "";                                
+                                });
+                              }
                             }, 
-                            errorText: "",
+                            errorText: _passwordError,
                             textBoxHint: "Password",
                             prefixIcon: "assets/icon/padlock.svg",
                           ),
 
                           SizedBox(
-                            height: 30,
+                            height: 50.h,
                           ),
 
                           CustomButton(
@@ -103,14 +179,14 @@ class _LoginState extends State<Login> {
                             buttonName: "Login", 
                             mainButton: true,
                             onTap: (){
-
+                              _login();
                             }
                           ),
 
                           
 
                           SizedBox(
-                            height: 30,
+                            height: 30.h,
                           ),
                         ]
                       )
@@ -122,6 +198,9 @@ class _LoginState extends State<Login> {
               ),
             ),
           ),
+
+          _loading?
+          Loading():Container()
 
         ],
       ),

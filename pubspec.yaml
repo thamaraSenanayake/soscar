@@ -32,6 +32,8 @@ dependencies:
   flutter_staggered_animations: ^1.0.0
   flutter_spinkit: ^5.0.0
   flutter_screenutil: ^5.0.0+2
+  google_nav_bar: ^5.0.5
+
 
 
 
@@ -64,6 +66,10 @@ flutter:
     - assets/icon/lock.svg
     - assets/icon/padlock.svg
     - assets/icon/user.svg
+    - assets/icon/comments.svg
+    - assets/icon/map.svg
+    - assets/icon/wallet.svg
+    - assets/images/giphy.gif
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
