@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:soscar/const.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:soscar/profileScreen.dart/map.dart';
 
 class ProfileBase extends StatefulWidget {
   ProfileBase({Key key}) : super(key: key);
@@ -12,6 +13,8 @@ class ProfileBase extends StatefulWidget {
 }
 
 class _ProfileBaseState extends State<ProfileBase> {
+  ProfileScreens _currentScreen = ProfileScreens.Maps;
+
   int _selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
@@ -33,9 +36,13 @@ class _ProfileBaseState extends State<ProfileBase> {
             ),
 
             SafeArea(
+              top: false,
               child: Column(
                 children: [
-                  
+                  _currentScreen == ProfileScreens.Maps?
+                  MapPage():
+                  Container()
+
                 ],
               ),
             ),
@@ -125,4 +132,11 @@ class _ProfileBaseState extends State<ProfileBase> {
       ),
     );
   }
+}
+
+enum ProfileScreens{
+  Maps,
+  Chat,
+  Wallet,
+  Profile
 }
