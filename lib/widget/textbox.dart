@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../const.dart';
 
 class TextBox extends StatefulWidget {
@@ -43,7 +43,6 @@ class TextBox extends StatefulWidget {
 }
 
 class _TextBoxState extends State<TextBox> {
-  double _width = 0.0;
   TextEditingController _controller;
 
   @override
@@ -63,23 +62,22 @@ class _TextBoxState extends State<TextBox> {
   @override
   Widget build(BuildContext context) {
     setState(() {
-      _width = MediaQuery.of(context).size.width;
     });
     return Container(
-      width: _width - 40,
+      width: AppData.width.w - 80.w,
       constraints: BoxConstraints(
-        minHeight: widget.textInputType == TextInputType.multiline? 150:50
+        minHeight: widget.textInputType == TextInputType.multiline? 300.h:100.h
       ),
       padding:EdgeInsets.only(
-        left:widget.prefixIcon == null ? 20 : 0,
-        right:widget.suffixIcon == null? 20 : 0
+        left:widget.prefixIcon == null ? 40.w : 0,
+        right:widget.suffixIcon == null? 40.w : 0
       ),
       decoration: BoxDecoration(
         // color: widget.errorText.length ==0 ?Colors.white:Colors.redAccent,
         color: Colors.white,
         border: Border.all(
           color: widget.errorText.length ==0?Colors.white:Colors.redAccent,
-          width: 3
+          width: 6.w
         ),
         borderRadius: BorderRadius.circular(3),
         boxShadow: [
@@ -98,20 +96,20 @@ class _TextBoxState extends State<TextBox> {
       child: Row(
         children: [
           widget.prefixIcon != null?Padding(
-            padding: const EdgeInsets.only(right:10.0),
+            padding:  EdgeInsets.only(right:20.w),
             child: Container(
-              height: 40,
-              width: 40,
-              padding: const EdgeInsets.all(5.0),
+              height: 80.h,
+              width: 80.w,
+              padding:  EdgeInsets.all(10.h),
               child: SvgPicture.asset(widget.prefixIcon)
             ),
           ):Container(),
           Container(
-            width: widget.prefixIcon == null?(_width -86):(_width -146),
+            width: widget.prefixIcon == null?(AppData.width.w -172):(AppData.width.w -292),
             child: TextField(
               style: TextStyle(
                 color: Colors.black, 
-                fontSize: 15
+                fontSize: 30.sp
               ),
               focusNode: widget.focusNode,
               controller:_controller,
@@ -119,7 +117,7 @@ class _TextBoxState extends State<TextBox> {
                 counterText: "",
                 border: InputBorder.none,
                 hintText: widget.textBoxHint,
-                hintStyle:TextStyle(fontSize: 14, color: Color(0xffB3A9A9), height: 1.8),
+                hintStyle:TextStyle(fontSize: 28.sp, color: Color(0xffB3A9A9), height: 1.8),
                 suffixIcon: widget.suffixIcon != null ? Icon(widget.suffixIcon) : null,
               ),
               maxLines: widget.textInputType == TextInputType.multiline?null:1,

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:soscar/const.dart';
 import 'package:soscar/widget/topBar.dart';
 import 'package:soscar/widget/customButton.dart';
 import 'package:soscar/widget/textbox.dart';
 import 'loginbase.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Login extends StatefulWidget {
   final LoginBaseListener listener;
@@ -15,17 +17,11 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  double _height = 0.0;
-  double _width = 0.0;
   @override
   Widget build(BuildContext context) {
-    setState(() {
-      _height = MediaQuery.of(context).size.height;
-      _width = MediaQuery.of(context).size.width;
-    });
     return Container(
-      height:_height,
-      width:_width,
+      height:AppData.height.h,
+      width:AppData.width.w,
       color: Colors.white,
       child: Stack(
         children:[
@@ -35,21 +31,21 @@ class _LoginState extends State<Login> {
           // ),
           SingleChildScrollView(
             child:Container(
-              height:_height,
-              width:_width,
+              height:AppData.height.h,
+              width:AppData.width.w,
               // color: Colors.white,
               child: Align(
                 alignment: Alignment.bottomCenter,
                 child:Padding(
-                  padding: const EdgeInsets.only(top:500.0),
+                  padding:  EdgeInsets.only(top:1000.h),
                   child: SvgPicture.asset("assets/images/background.svg"),
                 ) ,
               ),
             )
           ),
           Container(
-            height:_height,
-            width:_width,
+            height:AppData.height.h,
+            width:AppData.width.w,
             color: Colors.transparent,
             child: SafeArea(
               child: Column(
@@ -74,7 +70,7 @@ class _LoginState extends State<Login> {
                         ),
                         children:[
                           SizedBox(
-                            height: 50,
+                            height: 100.h,
                           ),
                           TextBox(
                             textBoxKey: "", 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:soscar/const.dart';
 import 'package:soscar/login/loginbase.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 void main() {
   runApp(MyApp());
@@ -9,14 +10,17 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Sos App',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        backgroundColor: Colors.white,
-        primarySwatch: Colors.blue,
+    return ScreenUtilInit(
+      builder:()=> MaterialApp(
+        title: 'Sos App',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          backgroundColor: Colors.white,
+          primarySwatch: Colors.blue,
+        ),
+        home: LoginBase(),
       ),
-      home: LoginBase(),
+      designSize: Size(828, 1792),
     );
   }
 }

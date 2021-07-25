@@ -4,7 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:soscar/widget/customButton.dart';
 import 'package:soscar/widget/textbox.dart';
 import 'package:soscar/widget/topBar.dart';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../const.dart';
 import 'loginbase.dart';
 
@@ -17,17 +17,13 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
-  double _height = 0.0;
-  double _width = 0.0;
   @override
   Widget build(BuildContext context) {
     setState(() {
-      _height = MediaQuery.of(context).size.height;
-      _width = MediaQuery.of(context).size.width;
     });
     return Container(
-      height:_height,
-      width:_width,
+      height:AppData.height.h,
+      width:AppData.width.w,
       color: Colors.white,
       child: Stack(
         children:[
@@ -36,22 +32,22 @@ class _SignInState extends State<SignIn> {
           //   color: AppColors.mainColor,
           // ),
           SingleChildScrollView(
-            child:Container(
-              height:_height,
-              width:_width,
+            child:SizedBox(
+              height:AppData.height.h,
+              width:AppData.width.w,
               // color: Colors.white,
               child: Align(
                 alignment: Alignment.bottomCenter,
                 child:Padding(
-                  padding: const EdgeInsets.only(top:500.0),
+                  padding:  EdgeInsets.only(top:1000.h),
                   child: SvgPicture.asset("assets/images/background.svg"),
                 ) ,
               ),
             )
           ),
           Container(
-            height:_height,
-            width:_width,
+            height:AppData.height.h,
+            width:AppData.width.w,
             color: Colors.transparent,
             child: SafeArea(
               child: Column(
@@ -76,7 +72,7 @@ class _SignInState extends State<SignIn> {
                         ),
                         children:[
                           SizedBox(
-                            height: 50,
+                            height: 100.h,
                           ),
                           TextBox(
                             textBoxKey: "", 
@@ -88,7 +84,7 @@ class _SignInState extends State<SignIn> {
                             prefixIcon: "assets/icon/font.svg",
                           ),
                           SizedBox(
-                            height: 20,
+                            height: 40.h,
                           ),
                           TextBox(
                             textBoxKey: "", 
@@ -100,7 +96,7 @@ class _SignInState extends State<SignIn> {
                             prefixIcon: "assets/icon/font.svg",
                           ),
                           SizedBox(
-                            height: 20,
+                            height: 40.h,
                           ),
                           TextBox(
                             textBoxKey: "", 
@@ -112,7 +108,7 @@ class _SignInState extends State<SignIn> {
                             prefixIcon: "assets/icon/gmail.svg",
                           ),
                           SizedBox(
-                            height: 20,
+                            height: 40.h,
                           ),
                           TextBox(
                             textBoxKey: "", 
@@ -125,7 +121,7 @@ class _SignInState extends State<SignIn> {
                           ),
 
                           SizedBox(
-                            height: 30,
+                            height: 60.h,
                           ),
 
                           CustomButton(
@@ -140,7 +136,7 @@ class _SignInState extends State<SignIn> {
                           
 
                           SizedBox(
-                            height: 30,
+                            height: 60.h,
                           ),
                         ]
                       )

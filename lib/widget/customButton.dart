@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:soscar/const.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomButton extends StatefulWidget {
   final String imageUrl;
@@ -23,11 +24,11 @@ class _CustomButtonState extends State<CustomButton> {
         widget.onTap();
       },
       child: Container(
-        width: MediaQuery.of(context).size.width - 40,
-        height:50,
+        width: AppData.width.w - 80.w,
+        height:100.h,
         decoration: BoxDecoration(
           color:widget.mainButton? AppColors.mainColor:widget.backgroundColor,
-          borderRadius: BorderRadius.circular(3),
+          borderRadius: BorderRadius.circular(6.r),
           boxShadow: [
             BoxShadow(color: Color.fromRGBO(0, 0, 0, 0.15)),
             BoxShadow(
@@ -46,9 +47,9 @@ class _CustomButtonState extends State<CustomButton> {
             widget.imageUrl != null? Align(
               alignment: Alignment.centerLeft,
               child: Container(
-                height: 50,
-                width: 50,
-                padding: const EdgeInsets.all(5.0),
+                height: 100.h,
+                width: 100.w,
+                padding:EdgeInsets.all(5.h),
                 child: SvgPicture.asset(widget.imageUrl)
               )
             ):Container(),
@@ -57,12 +58,12 @@ class _CustomButtonState extends State<CustomButton> {
               child: Text(
                 widget.buttonName,
                 style:widget.mainButton? TextStyle(
-                  fontSize: 18,
+                  fontSize: 36.sp,
                   fontWeight: FontWeight.w500,
                   color: Colors.white
                   ):TextStyle(
                     color: widget.textColor,
-                    fontSize: 15,
+                    fontSize: 30.sp,
                     fontWeight: FontWeight.w500
                   ),
               )
@@ -70,13 +71,13 @@ class _CustomButtonState extends State<CustomButton> {
 
             widget.mainButton?
             Padding(
-              padding: const EdgeInsets.only(right:10.0),
+              padding:  EdgeInsets.only(right:20.w),
               child: Align(
                 alignment: Alignment.centerRight,
                 child: Container(
-                  height: 30,
-                  width: 30,
-                  padding: const EdgeInsets.all(5.0),
+                  height: 60.h,
+                  width: 60.w,
+                  padding:  EdgeInsets.all(10.h),
                   child: RotatedBox(
                     quarterTurns: 2,
                     child: SvgPicture.asset(

@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:soscar/const.dart';
 import 'package:soscar/login/loginbase.dart';
 import 'package:soscar/widget/customButton.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SplashScreen extends StatefulWidget {
   final LoginBaseListener listener;
@@ -14,44 +15,38 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  double _height = 0.0;
-  double _width = 0.0;
   @override
   Widget build(BuildContext context) {
-    setState(() {
-      _height = MediaQuery.of(context).size.height;
-      _width = MediaQuery.of(context).size.width;
-    });
     return Container(
-      height:_height,
-      width:_width,
+      height:AppData.height.h,
+      width:AppData.width.w,
       color: Colors.white,
       child: Stack(
         children:[
           SingleChildScrollView(
-            child:Container(
-              height:_height,
-              width:_width,
-              color: Colors.white,
+            child:SizedBox(
+              height:AppData.height.h,
+              width:AppData.width.w,
+              // color: Colors.white,
               child: Align(
                 alignment: Alignment.bottomCenter,
                 child:Padding(
-                  padding: const EdgeInsets.only(top:500.0),
+                  padding: EdgeInsets.only(top:(1000).h),
                   child: SvgPicture.asset("assets/images/background.svg"),
                 ) ,
               ),
             )
           ),
           Container(
-            height:_height,
-            width:_width,
+            height:AppData.height.h,
+            width:AppData.width.w,
             child: Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(top:50.0),
+                  padding:  EdgeInsets.only(top:100.h),
                   child: Container(
-                    height: 200,
-                    width: 200,
+                    height: 400.h,
+                    width: 400.w,
                     child: Image.asset(
                       "assets/icon/logo.jpeg"
                     ),
@@ -59,7 +54,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 ),
 
                 SizedBox(
-                  height: 50,
+                  height: 50.h,
                 ),
 
                 AnimationLimiter(
@@ -83,7 +78,7 @@ class _SplashScreenState extends State<SplashScreen> {
                           buttonName: "Continue with Facebook"
                         ),
                         SizedBox(
-                          height: 20,
+                          height: 40.h,
                         ),
                         CustomButton(
                           textColor: Colors.white,
@@ -95,7 +90,7 @@ class _SplashScreenState extends State<SplashScreen> {
                           buttonName: "Continue with Twitter"
                         ),
                         SizedBox(
-                          height: 20,
+                          height: 40.h,
                         ),
                         CustomButton(
                           backgroundColor: Color(0xffF44336),
@@ -107,7 +102,7 @@ class _SplashScreenState extends State<SplashScreen> {
                           buttonName: "Continue with Email"
                         ),
                         SizedBox(
-                          height: 30,
+                          height: 50.h,
                         ),
                         CustomButton(
                           onTap: (){
@@ -128,7 +123,7 @@ class _SplashScreenState extends State<SplashScreen> {
           ),
 
           Padding(
-            padding: const EdgeInsets.only(bottom:20.0,left: 10,right: 10),
+            padding: EdgeInsets.only(bottom:40.h,left: 20.w,right: 20.w),
             child: Align(
               alignment: Alignment.bottomCenter,
               child: RichText(
@@ -138,7 +133,7 @@ class _SplashScreenState extends State<SplashScreen> {
                     TextSpan(
                       text: "By Sining up, you agree with the",
                       style: TextStyle(
-                        fontSize: 15,
+                        fontSize: 30.sp,
                         color: Colors.black,
                         backgroundColor: Colors.white,
                       ),
@@ -146,7 +141,7 @@ class _SplashScreenState extends State<SplashScreen> {
                     TextSpan(
                       text: " Terms of Services",
                       style: TextStyle(
-                        fontSize: 15,
+                        fontSize: 30.sp,
                         color: AppColors.mainColor,
                         backgroundColor: Colors.white,
                         decoration: TextDecoration.underline,
@@ -155,7 +150,7 @@ class _SplashScreenState extends State<SplashScreen> {
                     TextSpan(
                       text: " and ",
                       style: TextStyle(
-                        fontSize: 15,
+                        fontSize: 30.sp,
                         color: Colors.black,
                         backgroundColor: Colors.white,
                       ),
@@ -163,7 +158,7 @@ class _SplashScreenState extends State<SplashScreen> {
                     TextSpan(
                       text: " Privacy Policy",
                       style: TextStyle(
-                        fontSize: 15,
+                        fontSize: 30.sp,
                         color: AppColors.mainColor,
                         backgroundColor: Colors.white,
                         decoration: TextDecoration.underline,

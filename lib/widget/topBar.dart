@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../const.dart';
 
 class TopBar extends StatefulWidget {
@@ -16,8 +16,8 @@ class _TopBarState extends State<TopBar> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 50,
-      padding: EdgeInsets.symmetric(horizontal: 20),
+      height: 100.h,
+      padding: EdgeInsets.symmetric(horizontal: 40.w),
       // color: AppColors.mainColor,
       child: Stack(
         children: [
@@ -28,10 +28,10 @@ class _TopBarState extends State<TopBar> {
                 widget.back();
               },
               child: Container(
-                height: 30,
-                width: 30,
+                height: 60.h,
+                width: 60.h,
                 color: Colors.transparent,
-                padding: const EdgeInsets.all(5.0),
+                padding:  EdgeInsets.all(5.h),
                 child: SvgPicture.asset(
                   "assets/icon/arrow.svg",
                   color: AppColors.mainColor,
@@ -45,7 +45,7 @@ class _TopBarState extends State<TopBar> {
               widget.name,
               style: TextStyle(
                 color: AppColors.mainColor,
-                fontSize: 20,
+                fontSize: 40.sp,
                 fontWeight: FontWeight.w600
               ),
             ),
