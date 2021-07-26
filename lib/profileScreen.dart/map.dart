@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:soscar/widget/nearLocation.dart';
 import 'package:soscar/widget/textbox.dart';
 import '../const.dart';
@@ -22,7 +23,8 @@ class _MapPageState extends State<MapPage> {
 
   Map<MarkerId, Marker> markers = <MarkerId, Marker>{};
   GoogleMapController mapController;
-  CameraPosition  cameraPosition;
+  CameraPosition  _cameraPosition = CameraPosition(target: LatLng(-13.702797,-69.6865109),zoom: 4);
+  LatLng _currentLatLang;
 
 
   @override
@@ -33,19 +35,22 @@ class _MapPageState extends State<MapPage> {
 
   _getCurrentPosition() async {
     print("get location");
-    // Position position;
-    // try{
-    //   position = await Geolocator.getCurrentPosition(desiredAccuracy:LocationAccuracy.best);
-    // }
-    // catch (e){
-    //   return;
-    // }
-    // _currentLatLang = LatLng(position.latitude, position.longitude);
-    // _addMark(LatLng(position.latitude, position.longitude));
+    Position position;
+    try{
+      position = await Geolocator.getCurrentPosition(desiredAccuracy:LocationAccuracy.best);
+    }
+    catch (e){
+      return;
+    }
+
+    if( position != null){
+      _currentLatLang = LatLng(position.latitude, position.longitude);
+      _addMark(LatLng(position.latitude, position.longitude));
+    }
   }
 
   _addMark(LatLng position) async {
-    final Uint8List markerIcon = await getBytesFromAsset('assets/icon/user.png', 100);
+    final Uint8List markerIcon = await getBytesFromAsset('assets/images/user_location.png', 100);
     markers.remove("YOUR_LOCATION");
     var marker = Marker(
       markerId: MarkerId("YOUR_LOCATION"),
@@ -53,11 +58,16 @@ class _MapPageState extends State<MapPage> {
       icon: BitmapDescriptor.fromBytes(markerIcon),
     );
 
+    _cameraPosition = CameraPosition(
+      target: LatLng(position.latitude,position.longitude),
+      zoom: 15
+    );
+    CameraUpdate update =CameraUpdate.newCameraPosition(_cameraPosition);
+    CameraUpdate zoom = CameraUpdate.zoomTo(16);
+
+    mapController.moveCamera(update);      
+
     setState(() {
-      cameraPosition =  CameraPosition(
-        target: LatLng(position.latitude,position.longitude),
-        zoom: 15
-      );
       markers[MarkerId("YOUR_LOCATION")] = marker;
     });
   }
@@ -81,13 +91,7 @@ class _MapPageState extends State<MapPage> {
           children: [
             Container(
               child: GoogleMap(
-                initialCameraPosition: CameraPosition(
-                  target: LatLng(
-                    -13.702797,
-                    -69.6865109
-                  ),
-                  zoom: 4
-                ),
+                initialCameraPosition: _cameraPosition,
                 onMapCreated: _onMapCreated,
                 mapToolbarEnabled: true,
                 markers: Set<Marker>.of(markers.values),
@@ -115,8 +119,8 @@ class _MapPageState extends State<MapPage> {
 
             DraggableScrollableActuator(
               child: DraggableScrollableSheet(
-                initialChildSize: 0.15,
-                minChildSize: 0.15,
+                initialChildSize: 0.07,
+                minChildSize: 0.07,
                 maxChildSize: (0.70),
                 builder: (BuildContext context,ScrollController _scrollController) {
                   return SingleChildScrollView(
@@ -132,8 +136,8 @@ class _MapPageState extends State<MapPage> {
                           width: AppData.width.w,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(10.w),
-                              topRight: Radius.circular(10.w),
+                              topLeft: Radius.circular(30.w),
+                              topRight: Radius.circular(30.w),
                             ),
                             color: Colors.white,
                             boxShadow: [
@@ -148,6 +152,16 @@ class _MapPageState extends State<MapPage> {
                                 ),
                               )
                             ],
+                          ),
+                          child: Center(
+                            child:Container(
+                              width: 120.h,
+                              height: 15.w,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20.r),
+                                color: Colors.grey,
+                              ),
+                            ),
                           ),
                         ),
 
@@ -182,6 +196,7 @@ class _MapPageState extends State<MapPage> {
       mapController = controller;
       // controller.setMapStyle(_mapStyle);
     });
+
 
   }
 }

@@ -1,17 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:soscar/widget/messageHeader.dart';
+import '../const.dart';
 
-class Chat extends StatefulWidget {
-  Chat({Key key}) : super(key: key);
+class ChatPage extends StatefulWidget {
+  ChatPage({Key key}) : super(key: key);
 
   @override
-  _ChatState createState() => _ChatState();
+  _ChatPageState createState() => _ChatPageState();
 }
 
-class _ChatState extends State<Chat> {
+class _ChatPageState extends State<ChatPage> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-       child: null,
+    return SafeArea(
+      child: Container(
+        height:AppData.height.h -160.h,
+        width:AppData.width.w,
+        color: Colors.white,
+        padding: EdgeInsets.only(top:50.h),
+        child: Column(
+          children: [
+            MessageHeaderView(),
+            MessageHeaderView(),
+            MessageHeaderView(),
+          ],
+        ),
+      ),
     );
   }
 }

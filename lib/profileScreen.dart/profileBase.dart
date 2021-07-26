@@ -3,7 +3,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:soscar/const.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:soscar/profileScreen.dart/chat.dart';
 import 'package:soscar/profileScreen.dart/map.dart';
+import 'package:soscar/profileScreen.dart/profile.dart';
+import 'package:soscar/profileScreen.dart/wallet.dart';
 
 class ProfileBase extends StatefulWidget {
   ProfileBase({Key key}) : super(key: key);
@@ -41,6 +44,12 @@ class _ProfileBaseState extends State<ProfileBase> {
                 children: [
                   _currentScreen == ProfileScreens.Maps?
                   MapPage():
+                  _currentScreen == ProfileScreens.Chat?
+                  ChatPage():
+                  _currentScreen == ProfileScreens.Wallet?
+                  Wallet():
+                  _currentScreen == ProfileScreens.Profile?
+                  Profile():
                   Container()
 
                 ],
@@ -52,9 +61,31 @@ class _ProfileBaseState extends State<ProfileBase> {
                 alignment: Alignment.bottomCenter,
                 child: GNav(
                   onTabChange: (val){
-                    setState(() {
-                      _selectedIndex = val;                      
-                    });
+
+                    if(val == 0){
+                      setState(() {
+                        _currentScreen = ProfileScreens.Maps;
+                        _selectedIndex = val;                      
+                      });
+                    }
+                    else if(val == 1){
+                      setState(() {
+                        _currentScreen = ProfileScreens.Chat;
+                        _selectedIndex = val;                      
+                      });
+                    }
+                    else if(val == 2){
+                      setState(() {
+                        _currentScreen = ProfileScreens.Wallet;
+                        _selectedIndex = val;                      
+                      });
+                    }
+                    else if(val == 3){
+                      setState(() {
+                        _currentScreen = ProfileScreens.Profile;
+                        _selectedIndex = val;                      
+                      });
+                    }
                   },
                   selectedIndex: _selectedIndex,
                   backgroundColor: AppColors.mainColor,
