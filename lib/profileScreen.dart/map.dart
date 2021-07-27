@@ -105,14 +105,17 @@ class _MapPageState extends State<MapPage> {
               padding:  EdgeInsets.only(top:100.h),
               child: Align(
                 alignment: Alignment.topCenter,
-                child: TextBox(
-                  textBoxKey: "textBoxKey", 
-                  onChange: (val){
+                child: SizedBox(
+                  height: 100.h,
+                  child: TextBox(
+                    textBoxKey: "textBoxKey", 
+                    onChange: (val){
 
-                  }, 
-                  errorText: "",
-                  textBoxHint: "Search",
-                  suffixIcon: Icons.search,
+                    }, 
+                    errorText: "",
+                    textBoxHint: "Search",
+                    suffixIcon: Icons.search,
+                  ),
                 ),
               ),
             ),

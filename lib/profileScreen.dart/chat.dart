@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:soscar/widget/messageHeader.dart';
 import '../const.dart';
 
@@ -19,12 +20,23 @@ class _ChatPageState extends State<ChatPage> {
         width:AppData.width.w,
         color: Colors.white,
         padding: EdgeInsets.only(top:50.h),
-        child: Column(
-          children: [
-            MessageHeaderView(),
-            MessageHeaderView(),
-            MessageHeaderView(),
-          ],
+        child:AnimationLimiter(
+          child: Column(
+            children: AnimationConfiguration.toStaggeredList(
+              duration: const Duration(milliseconds: 475),
+              childAnimationBuilder: (widget) => SlideAnimation(
+                horizontalOffset: 50.0,
+                child: FadeInAnimation(
+                  child: widget,
+                ),
+              ),
+              children:[
+                MessageHeaderView(),
+                MessageHeaderView(),
+                MessageHeaderView(),
+              ]
+            ),
+          ),
         ),
       ),
     );

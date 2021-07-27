@@ -67,7 +67,7 @@ class _TextBoxState extends State<TextBox> {
       width: AppData.width.w - 80.w,
       constraints: BoxConstraints(
         minHeight: widget.textInputType == TextInputType.multiline? 300.h:100.h,
-        maxHeight: widget.textInputType == TextInputType.multiline? null:100.h
+        // maxHeight: widget.textInputType == TextInputType.multiline? 300.h:100.h
       ),
       padding:EdgeInsets.only(
         left:widget.prefixIcon == null ? 40.w : 0,
@@ -95,6 +95,8 @@ class _TextBoxState extends State<TextBox> {
         ],
       ),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment:widget.textInputType== TextInputType.multiline ?CrossAxisAlignment.start:CrossAxisAlignment.center,
         children: [
           widget.prefixIcon != null?Padding(
             padding:  EdgeInsets.only(right:20.w),
