@@ -13,6 +13,7 @@ import 'package:soscar/profileScreen.dart/saveImage.dart';
 import 'package:soscar/profileScreen.dart/termsOfServices.dart';
 import 'package:soscar/widget/customButton.dart';
 import 'package:soscar/widget/textbox.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../const.dart';
 
 class Profile extends StatefulWidget {
@@ -427,8 +428,19 @@ class _ProfileState extends State<Profile> implements SaveImageListener {
                     suffixIconDisplay: true,
                     imageUrl: null, 
                     buttonName: "Help", 
-                    onTap: (){
+                    onTap: () async{
+                      final Uri params = Uri(
+                        scheme: 'mailto',
+                        path: 'sosCar@gmail.com',
+                        query: 'subject=Need a help SoS car Driver', //add subject and body here
+                      );
 
+                      var url = params.toString();
+                      if (await canLaunch(url)) {
+                        await launch(url);
+                      } else {
+                        throw 'Could not launch $url';
+                      }
                     },
                     // mainButton: true,
                     backgroundColor: Colors.white,

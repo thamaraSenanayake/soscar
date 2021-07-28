@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:soscar/const.dart';
 import 'package:soscar/profileScreen.dart/profileBase.dart';
 import 'package:soscar/widget/loading.dart';
+import 'package:soscar/widget/smallTextBox.dart';
 import 'package:soscar/widget/topBar.dart';
 import 'package:soscar/widget/customButton.dart';
 import 'package:soscar/widget/textbox.dart';
@@ -20,15 +21,20 @@ class EmailConformation extends StatefulWidget {
 
 class _EmailConformationState extends State<EmailConformation> {
   String _num1 = '';
+  FocusNode _num1Focus = FocusNode();
   String _num2 = '';
+  FocusNode _num2Focus = FocusNode();
   String _num3 = '';
+  FocusNode _num3Focus = FocusNode();
   String _num4 = '';
+  FocusNode _num4Focus = FocusNode();
   String _codeError = '';
   bool _loading = false;
 
 
 
-  _login() async {
+  _checkCode() async {
+    FocusScope.of(context).unfocus();
     if( _num1.isEmpty || _num2.isEmpty || _num3.isEmpty || _num4.isEmpty){
       setState(() {
         _codeError = "Required Field";        
@@ -129,9 +135,10 @@ class _EmailConformationState extends State<EmailConformation> {
                                 SizedBox(
                                   height: 100.h,
                                   width: 100.h,
-                                  child: TextBox(
+                                  child: SmallTextBox(
                                     textInputType: TextInputType.number,
                                     textBoxKey: "", 
+                                    focusNode: _num1Focus,
                                     onChange: (val){
                                       _num1 = val;
                                       if(_codeError.isNotEmpty){
@@ -139,6 +146,9 @@ class _EmailConformationState extends State<EmailConformation> {
                                           _codeError = "";                                
                                         });
                                       }
+                                      if(val.isNotEmpty){
+                                        _num2Focus.requestFocus();
+                                      }
                                     }, 
                                     errorText: _codeError,
                                     textBoxHint: "",
@@ -147,9 +157,10 @@ class _EmailConformationState extends State<EmailConformation> {
                                 SizedBox(
                                   height: 100.h,
                                   width: 100.h,
-                                  child: TextBox(
+                                  child: SmallTextBox(
                                     textInputType: TextInputType.number,
                                     textBoxKey: "", 
+                                    focusNode: _num2Focus,
                                     onChange: (val){
                                       _num2 = val;
                                       if(_codeError.isNotEmpty){
@@ -157,6 +168,9 @@ class _EmailConformationState extends State<EmailConformation> {
                                           _codeError = "";                                
                                         });
                                       }
+                                      if(val.isNotEmpty){
+                                        _num3Focus.requestFocus();
+                                      }
                                     }, 
                                     errorText: _codeError,
                                     textBoxHint: "",
@@ -165,9 +179,10 @@ class _EmailConformationState extends State<EmailConformation> {
                                 SizedBox(
                                   height: 100.h,
                                   width: 100.h,
-                                  child: TextBox(
+                                  child: SmallTextBox(
                                     textInputType: TextInputType.number,
                                     textBoxKey: "", 
+                                    focusNode: _num3Focus,
                                     onChange: (val){
                                       _num3 = val;
                                       if(_codeError.isNotEmpty){
@@ -175,6 +190,9 @@ class _EmailConformationState extends State<EmailConformation> {
                                           _codeError = "";                                
                                         });
                                       }
+                                      if(val.isNotEmpty){
+                                        _num4Focus.requestFocus();
+                                      }
                                     }, 
                                     errorText: _codeError,
                                     textBoxHint: "",
@@ -183,9 +201,10 @@ class _EmailConformationState extends State<EmailConformation> {
                                 SizedBox(
                                   height: 100.h,
                                   width: 100.h,
-                                  child: TextBox(
+                                  child: SmallTextBox(
                                     textInputType: TextInputType.number,
                                     textBoxKey: "", 
+                                    focusNode: _num4Focus,
                                     onChange: (val){
                                       _num4 = val;
                                       if(_codeError.isNotEmpty){
@@ -193,6 +212,7 @@ class _EmailConformationState extends State<EmailConformation> {
                                           _codeError = "";                                
                                         });
                                       }
+                                      
                                     }, 
                                     errorText: _codeError,
                                     textBoxHint: "",
@@ -200,6 +220,10 @@ class _EmailConformationState extends State<EmailConformation> {
                                 ),
                               ],
                             ),
+                          ),
+
+                          SizedBox(
+                            height:100.h
                           ),
 
                           SizedBox(
@@ -211,17 +235,20 @@ class _EmailConformationState extends State<EmailConformation> {
                                 color: Colors.black,
                                 fontSize: 30.sp
                               ),
+                              textAlign: TextAlign.center,
                             ),
                           ),
 
-                          
+                          SizedBox(
+                            height:150.h
+                          ),
 
                           CustomButton(
                             imageUrl: null, 
                             buttonName: "Done", 
                             mainButton: true,
                             onTap: (){
-                              _login();
+                              _checkCode();
                             }
                           ),
 

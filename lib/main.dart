@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:soscar/const.dart';
 import 'package:soscar/login/loginbase.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   runApp(MyApp());
@@ -17,6 +18,9 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           backgroundColor: Colors.white,
           primarySwatch: Colors.blue,
+          textTheme: GoogleFonts.nunitoTextTheme(
+            Theme.of(context).textTheme,
+          ),
         ),
         home: LoginBase(),
       ),

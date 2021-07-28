@@ -45,8 +45,24 @@ class _SplashScreenState extends State<SplashScreen> {
                 Padding(
                   padding:  EdgeInsets.only(top:100.h),
                   child: Container(
-                    height: 400.h,
-                    width: 400.w,
+                    height: 300.h,
+                    width: 300.w,
+                    decoration: BoxDecoration(
+                      color:Colors.white,
+                      borderRadius: BorderRadius.circular(6.r),
+                      boxShadow: [
+                        BoxShadow(color: Color.fromRGBO(0, 0, 0, 0.15)),
+                        BoxShadow(
+                          color:Color.fromRGBO(0, 0, 0, 0.15),
+                          blurRadius: 11.0,
+                          spreadRadius: 0.0,
+                          offset: Offset(
+                            0.0,
+                            3.0,
+                          ),
+                        )
+                      ],
+                    ),
                     child: Image.asset(
                       "assets/icon/logo.jpeg"
                     ),
@@ -54,7 +70,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 ),
 
                 SizedBox(
-                  height: 50.h,
+                  height: 150.h,
                 ),
 
                 AnimationLimiter(

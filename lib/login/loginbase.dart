@@ -32,20 +32,21 @@ class _LoginBaseState extends State<LoginBase> implements LoginBaseListener{
     );
   }
 
-  Future<bool> _onBackPressed() {
-    
+  Future<bool> _onBackPressed() async {
+    if(_currentPage == LoginPage.Splash){
       return showDialog(
+        barrierDismissible: false,
         context: context,
-        builder: (context) => new AlertDialog(
-          title: new Text('Are you sure?'),
-          content: new Text('Do you want to exit an App'),
+        builder: (context) => AlertDialog(
+          title: Text('Are you sure?'),
+          content: Text('Do you want to exit an App'),
           actions: <Widget>[
-            new GestureDetector(
+            GestureDetector(
               onTap: () => Navigator.of(context).pop(false),
               child: Text("NO"),
             ),
             SizedBox(height: 16),
-            new GestureDetector(
+            GestureDetector(
               onTap: () => Navigator.of(context).pop(true),
               child: Text("YES"),
             ),
@@ -53,7 +54,12 @@ class _LoginBaseState extends State<LoginBase> implements LoginBaseListener{
         ),
       ) ??
           false;
-        
+    }else{
+      setState(() {
+         _currentPage = LoginPage.Splash;     
+      });
+      return false;
+    }   
   }
 
   @override
