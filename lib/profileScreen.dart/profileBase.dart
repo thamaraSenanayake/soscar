@@ -41,19 +41,25 @@ class _ProfileBaseState extends State<ProfileBase> {
 
             SafeArea(
               top: false,
-              child: Column(
-                children: [
-                  _currentScreen == ProfileScreens.Maps?
-                  MapPage():
-                  _currentScreen == ProfileScreens.Chat?
-                  ChatPage():
-                  _currentScreen == ProfileScreens.Wallet?
-                  Wallet():
-                  _currentScreen == ProfileScreens.Profile?
-                  Profile():
-                  Container()
+              child: SizedBox(
+                height:AppData.height.h,
+                width:AppData.width.w,
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      _currentScreen == ProfileScreens.Maps?
+                      MapPage():
+                      _currentScreen == ProfileScreens.Chat?
+                      ChatPage():
+                      _currentScreen == ProfileScreens.Wallet?
+                      Wallet():
+                      _currentScreen == ProfileScreens.Profile?
+                      Profile():
+                      Container()
 
-                ],
+                    ],
+                  ),
+                ),
               ),
             ),
 

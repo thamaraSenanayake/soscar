@@ -89,7 +89,7 @@ class _EmailConformationState extends State<EmailConformation> {
                 children: [
 
                   TopBar(
-                    name: "Login", 
+                    name: "Email Verification", 
                     back:(){
                       widget.listener.moveToPage(LoginPage.Splash);
                     }
@@ -109,7 +109,8 @@ class _EmailConformationState extends State<EmailConformation> {
                           SizedBox(
                             height: 60.h,
                           ),
-                          SizedBox(
+                          Container(
+                            
                             height: 40.h,
                             width: AppData.width.h-80.h,
                             child: Text(
@@ -120,81 +121,85 @@ class _EmailConformationState extends State<EmailConformation> {
                               ),
                             ),
                           ),
-                          Row(
-                            children: [
-                              SizedBox(
-                                height: 100.h,
-                                width: 100.h,
-                                child: TextBox(
-                                  textInputType: TextInputType.number,
-                                  textBoxKey: "", 
-                                  onChange: (val){
-                                    _num1 = val;
-                                    if(_codeError.isNotEmpty){
-                                      setState(() {
-                                        _codeError = "";                                
-                                      });
-                                    }
-                                  }, 
-                                  errorText: _codeError,
-                                  textBoxHint: "",
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 40.h),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                SizedBox(
+                                  height: 100.h,
+                                  width: 100.h,
+                                  child: TextBox(
+                                    textInputType: TextInputType.number,
+                                    textBoxKey: "", 
+                                    onChange: (val){
+                                      _num1 = val;
+                                      if(_codeError.isNotEmpty){
+                                        setState(() {
+                                          _codeError = "";                                
+                                        });
+                                      }
+                                    }, 
+                                    errorText: _codeError,
+                                    textBoxHint: "",
+                                  ),
                                 ),
-                              ),
-                              SizedBox(
-                                height: 100.h,
-                                width: 100.h,
-                                child: TextBox(
-                                  textInputType: TextInputType.number,
-                                  textBoxKey: "", 
-                                  onChange: (val){
-                                    _num2 = val;
-                                    if(_codeError.isNotEmpty){
-                                      setState(() {
-                                        _codeError = "";                                
-                                      });
-                                    }
-                                  }, 
-                                  errorText: _codeError,
-                                  textBoxHint: "",
+                                SizedBox(
+                                  height: 100.h,
+                                  width: 100.h,
+                                  child: TextBox(
+                                    textInputType: TextInputType.number,
+                                    textBoxKey: "", 
+                                    onChange: (val){
+                                      _num2 = val;
+                                      if(_codeError.isNotEmpty){
+                                        setState(() {
+                                          _codeError = "";                                
+                                        });
+                                      }
+                                    }, 
+                                    errorText: _codeError,
+                                    textBoxHint: "",
+                                  ),
                                 ),
-                              ),
-                              SizedBox(
-                                height: 100.h,
-                                width: 100.h,
-                                child: TextBox(
-                                  textInputType: TextInputType.number,
-                                  textBoxKey: "", 
-                                  onChange: (val){
-                                    _num3 = val;
-                                    if(_codeError.isNotEmpty){
-                                      setState(() {
-                                        _codeError = "";                                
-                                      });
-                                    }
-                                  }, 
-                                  errorText: _codeError,
-                                  textBoxHint: "",
+                                SizedBox(
+                                  height: 100.h,
+                                  width: 100.h,
+                                  child: TextBox(
+                                    textInputType: TextInputType.number,
+                                    textBoxKey: "", 
+                                    onChange: (val){
+                                      _num3 = val;
+                                      if(_codeError.isNotEmpty){
+                                        setState(() {
+                                          _codeError = "";                                
+                                        });
+                                      }
+                                    }, 
+                                    errorText: _codeError,
+                                    textBoxHint: "",
+                                  ),
                                 ),
-                              ),
-                              SizedBox(
-                                height: 100.h,
-                                width: 100.h,
-                                child: TextBox(
-                                  textInputType: TextInputType.number,
-                                  textBoxKey: "", 
-                                  onChange: (val){
-                                    _num4 = val;
-                                    if(_codeError.isNotEmpty){
-                                      setState(() {
-                                        _codeError = "";                                
-                                      });
-                                    }
-                                  }, 
-                                  errorText: _codeError,
-                                  textBoxHint: "",
+                                SizedBox(
+                                  height: 100.h,
+                                  width: 100.h,
+                                  child: TextBox(
+                                    textInputType: TextInputType.number,
+                                    textBoxKey: "", 
+                                    onChange: (val){
+                                      _num4 = val;
+                                      if(_codeError.isNotEmpty){
+                                        setState(() {
+                                          _codeError = "";                                
+                                        });
+                                      }
+                                    }, 
+                                    errorText: _codeError,
+                                    textBoxHint: "",
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
 
                           SizedBox(

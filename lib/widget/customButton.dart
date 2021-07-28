@@ -10,7 +10,8 @@ class CustomButton extends StatefulWidget {
   final bool mainButton;
   final Color backgroundColor;
   final Color textColor;
-  CustomButton({Key key,@required this.imageUrl,@required this.buttonName,@required this.onTap, this.mainButton = false, this.backgroundColor = Colors.white ,this.textColor = Colors.black}) : super(key: key);
+  final bool suffixIconDisplay;
+  CustomButton({Key key,@required this.imageUrl,@required this.buttonName,@required this.onTap, this.mainButton = false, this.backgroundColor = Colors.white ,this.textColor = Colors.black, this.suffixIconDisplay = false}) : super(key: key);
 
   @override
   _CustomButtonState createState() => _CustomButtonState();
@@ -69,7 +70,7 @@ class _CustomButtonState extends State<CustomButton> {
               )
             ),
 
-            widget.mainButton?
+            widget.mainButton || widget.suffixIconDisplay?
             Padding(
               padding:  EdgeInsets.only(right:20.w),
               child: Align(
@@ -82,7 +83,7 @@ class _CustomButtonState extends State<CustomButton> {
                     quarterTurns: 2,
                     child: SvgPicture.asset(
                       "assets/icon/arrow.svg",
-                      color: Colors.white,
+                      color:widget.suffixIconDisplay?AppColors.mainColor:Colors.white,
                     )
                   )
                 )

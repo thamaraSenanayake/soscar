@@ -131,6 +131,7 @@ class _TextBoxState extends State<TextBox> {
                 widget.onChange(value);
               },
               onSubmitted: (value) {
+                if(widget.onSubmit != null)
                 widget.onSubmit(value);
               },
               maxLength: null,

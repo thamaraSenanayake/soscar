@@ -28,6 +28,7 @@ class _LoginState extends State<Login> {
 
 
   _login() async {
+    FocusScope.of(context).unfocus();
     bool _validation = true;
     if( _email.isEmpty){
       setState(() {
@@ -53,7 +54,7 @@ class _LoginState extends State<Login> {
       setState(() {
         _loading = false;
       });
-      Navigator.of(context).push(
+      Navigator.of(context).pushReplacement(
         PageRouteBuilder(
           pageBuilder: (context, _, __) => ProfileBase(),
           opaque: false

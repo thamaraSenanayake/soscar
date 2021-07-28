@@ -4,8 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:soscar/dialog/warningDialog.dart';
+import 'package:soscar/login/loginbase.dart';
+import 'package:soscar/profileScreen.dart/changePassword.dart';
+import 'package:soscar/profileScreen.dart/privacy.dart';
 // import 'package:image_picker/image_picker.dart';
 import 'package:soscar/profileScreen.dart/saveImage.dart';
+import 'package:soscar/profileScreen.dart/termsOfServices.dart';
+import 'package:soscar/widget/customButton.dart';
 import 'package:soscar/widget/textbox.dart';
 import '../const.dart';
 
@@ -25,6 +31,7 @@ class _ProfileState extends State<Profile> implements SaveImageListener {
   bool _isMale = true;
   bool _isColorBlind = false;
   File _file;
+  bool _colorBlind = false;
 
   @override
   Widget build(BuildContext context) {
@@ -177,7 +184,7 @@ class _ProfileState extends State<Profile> implements SaveImageListener {
                     height: 30.h,
                   ),
                   TextBox(
-                    prefixIcon: "assets/icon/user.svg",
+                    prefixIcon: "assets/icon/info.svg",
                     textBoxKey: "textBoxKey", 
                     onChange: (val){
 
@@ -234,6 +241,274 @@ class _ProfileState extends State<Profile> implements SaveImageListener {
                   SizedBox(
                     height: 30.h,
                   ),
+
+                  Padding(
+                    padding:  EdgeInsets.symmetric(horizontal:40.w),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        GestureDetector(
+                          onTap: (){
+                            setState(() {
+                              _isMale = false;
+                            });
+                          },
+                          child: AnimatedContainer(
+                            duration: Duration(milliseconds: 500),
+                            height: 100.h,
+                            width: (((AppData.width/2) - 60).h),
+                            decoration: BoxDecoration(
+                              color:_isMale? Colors.white:AppColors.mainColor,
+                              boxShadow: [
+                                BoxShadow(color: Color.fromRGBO(0, 0, 0, 0.15)),
+                                BoxShadow(
+                                  color:Color.fromRGBO(0, 0, 0, 0.15),
+                                  blurRadius: 11.0,
+                                  spreadRadius: 0.0,
+                                  offset: Offset(
+                                    0.0,
+                                    3.0,
+                                  ),
+                                )
+                              ],
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Padding(
+                                  padding:  EdgeInsets.only(right:20.w),
+                                  child: Text(
+                                    "Female",
+                                    style: TextStyle(
+                                      color:_isMale? Colors.black:Colors.white,
+                                      fontSize: 30.sp,
+                                      fontWeight: FontWeight.w500
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 60.h,
+                                  width: 60.h,
+                                  child: SvgPicture.asset("assets/icon/woman.svg")
+                                ),
+
+                              ],
+                            ),
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: (){
+                            setState(() {
+                              _isMale = true;
+                            });
+                          },
+                          child: AnimatedContainer(
+                            duration: Duration(milliseconds: 500),
+                            height: 100.h,
+                            width: (((AppData.width/2) - 60).h),
+                            decoration: BoxDecoration(
+                              color:_isMale?AppColors.mainColor: Colors.white,
+                              boxShadow: [
+                                BoxShadow(color: Color.fromRGBO(0, 0, 0, 0.15)),
+                                BoxShadow(
+                                  color:Color.fromRGBO(0, 0, 0, 0.15),
+                                  blurRadius: 11.0,
+                                  spreadRadius: 0.0,
+                                  offset: Offset(
+                                    0.0,
+                                    3.0,
+                                  ),
+                                )
+                              ],
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Padding(
+                                  padding:  EdgeInsets.only(right:20.w),
+                                  child: Text(
+                                    "Male",
+                                    style: TextStyle(
+                                      color:_isMale?Colors.white: Colors.black,
+                                      fontSize: 30.sp,
+                                      fontWeight: FontWeight.w500
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 60.h,
+                                  width: 60.h,
+                                  child: SvgPicture.asset("assets/icon/man.svg")
+                                ),
+
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  SizedBox(
+                    height: 30.h,
+                  ),
+
+                  CustomButton(
+                    suffixIconDisplay: true,
+                    imageUrl: null, 
+                    buttonName: "Change Password", 
+                    onTap: (){
+                      Navigator.of(context).push(
+                        PageRouteBuilder(
+                          pageBuilder: (context, _, __) => ChangePassword(),
+                          opaque: false
+                        ),
+                      );
+                    },
+                    // mainButton: true,
+                    backgroundColor: Colors.white,
+                  ),
+
+                  SizedBox(
+                    height: 30.h,
+                  ),
+
+                  Container(
+                    height: 70.h,
+                    width: AppData.width.w,
+                    padding: EdgeInsets.only(left:40.w),
+                    child:Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        "Private Information",
+                        style: TextStyle(
+                          color: AppColors.mainColor,
+                          fontSize: 40.sp,
+                          fontWeight: FontWeight.w500
+                        ),
+                      ),
+                    ),
+                  ),
+
+                  Padding(
+                    padding:  EdgeInsets.only(left:8.w),
+                    child: SwitchListTile(
+                      value: _colorBlind, 
+                      activeColor: AppColors.mainColor,
+                      onChanged: (val){
+                        setState(() {
+                          _colorBlind = val;                        
+                        });
+                      },
+                      title:Text(
+                        "Color Blind Mode",
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 30.sp,
+                          fontWeight: FontWeight.w500
+                        ),
+                      ),
+                      subtitle:Text(
+                        "Adds patterns to labels so that they are distinguishable by more than color",
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 25.sp,
+                          fontWeight: FontWeight.w300
+                        ),
+                      ),
+                    ),
+                  ),
+
+                  SizedBox(
+                    height: 100.h,
+                  ),
+
+                  CustomButton(
+                    suffixIconDisplay: true,
+                    imageUrl: null, 
+                    buttonName: "Help", 
+                    onTap: (){
+
+                    },
+                    // mainButton: true,
+                    backgroundColor: Colors.white,
+                  ),
+
+                  SizedBox(
+                    height: 30.h,
+                  ),
+
+                  CustomButton(
+                    suffixIconDisplay: true,
+                    imageUrl: null, 
+                    buttonName: "Privacy", 
+                    onTap: (){
+                      Navigator.of(context).push(
+                        PageRouteBuilder(
+                          pageBuilder: (context, _, __) => Privacy(),
+                          opaque: false
+                        ),
+                      );
+                    },
+                    // mainButton: true,
+                    backgroundColor: Colors.white,
+                  ),
+
+                  SizedBox(
+                    height: 30.h,
+                  ),
+
+                  CustomButton(
+                    suffixIconDisplay: true,
+                    imageUrl: null, 
+                    buttonName: "Terms of service", 
+                    onTap: (){
+                      Navigator.of(context).push(
+                        PageRouteBuilder(
+                          pageBuilder: (context, _, __) => TermsOfServices(),
+                          opaque: false
+                        ),
+                      );
+                    },
+                    // mainButton: true,
+                    backgroundColor: Colors.white,
+                  ),
+
+                  SizedBox(
+                    height: 100.h,
+                  ),
+
+                  CustomButton(
+                    mainButton: true,
+                    imageUrl: null, 
+                    buttonName: "Logout", 
+                    onTap: (){
+                      Navigator.of(context).push(
+                        PageRouteBuilder(
+                          pageBuilder: (context, _, __) => WarningDialog(
+                            listener:(val){
+                              Navigator.of(context).pushReplacement(
+                                PageRouteBuilder(
+                                  pageBuilder: (context, _, __) => LoginBase(),
+                                  opaque: false
+                                ),
+                              );
+                            },
+                            msg: "Are you sure you want to logout from app?",
+                          ),
+                          opaque: false
+                        ),
+                      );
+                    },
+                    // mainButton: true,
+                    backgroundColor: Colors.white,
+                  ),
+
+
+                  SizedBox(
+                    height: 700.h,
+                  ),
+
 
                 ]
               ),
